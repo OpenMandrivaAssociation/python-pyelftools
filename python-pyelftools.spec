@@ -2,7 +2,7 @@
 
 Name:           python-%{module}
 Version:        0.25
-Release:        %mkrel 2
+Release:        3
 Summary:        Pure-python library for parsing ELF and DWARF
 Group:          Development/Python
 License:        Public Domain
