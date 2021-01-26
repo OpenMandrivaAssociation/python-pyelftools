@@ -1,7 +1,7 @@
 %define module  pyelftools
 
 Name:           python-%{module}
-Version:	0.26
+Version:	0.27
 Release:	1
 Summary:        Pure-python library for parsing ELF and DWARF
 Group:          Development/Python
