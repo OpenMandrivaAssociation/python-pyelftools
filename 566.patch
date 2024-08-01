@@ -1,0 +1,27 @@
+From 6353158c1e76b763e04239c265a4895f1a6b00f5 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Bernhard=20Rosenkr=C3=A4nzer?= <bero@lindev.ch>
+Date: Thu, 1 Aug 2024 17:08:23 +0200
+Subject: [PATCH] Fix crash in readelf.py if a symbol doesn't define st_shndx
+
+symbol['st_shndx'] can take a value of 'SHN_UNDEF' -- causing a crash in
+readelf.py when dumping the symbol table since that non-numeric value
+can't be compared to self.elffile.num_sections().
+
+Add a check before assuming st_shndx is numeric.
+---
+ scripts/readelf.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/scripts/readelf.py b/scripts/readelf.py
+index 2a7d49c8..1cbc1adf 100755
+--- a/scripts/readelf.py
++++ b/scripts/readelf.py
+@@ -487,7 +487,7 @@ def display_symbol_tables(self):
+                 symbol_name = symbol.name
+                 # Print section names for STT_SECTION symbols as readelf does
+                 if (symbol['st_info']['type'] == 'STT_SECTION'
+-                    and symbol['st_shndx'] < self.elffile.num_sections()
++                    and (type(symbol['st_shndx']) == int and symbol['st_shndx'] < self.elffile.num_sections())
+                     and symbol['st_name'] == 0):
+                     symbol_name = self.elffile.get_section(symbol['st_shndx']).name
+ 
