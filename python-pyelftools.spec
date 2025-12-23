@@ -9,6 +9,7 @@ License:	Public Domain
 URL:		https://github.com/eliben/pyelftools
 Source0:	https://github.com/eliben/pyelftools/archive/v%{version}/%{module}-%{version}.tar.gz
 BuildArch:	noarch
+BuildRequires:  python%{pyver}dist(setuptools)
 BuildRequires:  python%{pyver}dist(pip)
 %rename		python-elftools
 Obsoletes:	python2-pyelftools < 0.29-2
@@ -25,5 +26,5 @@ rm -rf %{buildroot}%{_bindir}/__pycache__
 %doc CHANGES README.rst
 %license LICENSE
 %{_bindir}/readelf.py
-%{python3_sitelib}/elftools/
-%{python3_sitelib}/*.dist-info
+%{python_sitelib}/elftools/
+%{python_sitelib}/*.dist-info
