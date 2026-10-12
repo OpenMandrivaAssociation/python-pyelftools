@@ -23,7 +23,7 @@ and DWARF debugging information.
 rm -rf %{buildroot}%{_bindir}/__pycache__
 
 %files
-%doc CHANGES README.rst
+%doc CHANGES README.md
 %license LICENSE
 %{_bindir}/readelf.py
 %{python_sitelib}/elftools/
